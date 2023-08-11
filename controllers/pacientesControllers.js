@@ -25,7 +25,7 @@ const pacientesPost = async (req = request, res = response) => {
         await paciente.save();
         res.status(200).json({
             ok: true,
-            mensaje: 'paciente creado correctamente',
+            mensaje: 'Paciente creado correctamente',
         });
     } catch (error) {
         console.log(error);
@@ -41,18 +41,18 @@ const pacientesDelete = async (req = request, res = response) => {
         const paciente = await Paciente.findById(id);
         if (!paciente.estado) {
             return res.status(404).json({
-                msg: 'el paciente ya estaba inactivo'
+                msg: 'El paciente ya estaba inactivo'
             })
         }
         const pacienteinactivado = await Paciente.findByIdAndUpdate(id, { estado: false }, { new: true })
         if (pacienteinactivado) {
             res.status(200).json({
-                msg: 'paciente inactivado correctamente',
+                msg: 'Paciente inactivado correctamente',
             })
         }
     } catch (error) {
         console.log(error);
-        res.status(400).json({ ok: false, message: 'Ha ocurrido un error' });
+        res.status(400).json({ ok: false, message: 'Error al borrar el paciente' });
     }
 };
 
@@ -63,7 +63,7 @@ const pacientesUpdate = async (req = request, res = response) => {
         const paciente = await Paciente.findByIdAndUpdate(id, resto, { new: true });
         if (paciente) {
             res.status(200).json({
-                mensaje: 'paciente actualizado correctamente'
+                mensaje: 'Paciente actualizado correctamente'
             })
         }
     } catch (error) {

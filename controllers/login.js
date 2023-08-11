@@ -10,14 +10,9 @@ const login = async (req = request, res = response) => {
 
         const usuario = await Usuario.findOne({ correo })
         const passwordValida = bcrypt.compareSync(password, usuario.password)
-        if (!usuario || !passwordValida) {
+        if (!usuario || !passwordValida || !usuario.estado) {
             return res.status(400).json({
-                msg: "El correo o password son incorrectos o usuario inactivo"
-            })
-        }
-        if (!usuario.estado) {
-            return res.status(400).json({
-                msg: "El usuario esta inactivo"
+                msg: "El correo/password son incorrectos o el usuario esta inactivo"
             })
         }
         const token = await generarJWT(usuario.id);
@@ -29,7 +24,7 @@ const login = async (req = request, res = response) => {
         })
     } catch (error) {
         return res.status(500).json({
-            msg: "ponerse en contacto con el administrador",
+            msg: "Ponerse en contacto con el administrador",
             error
         })
     }

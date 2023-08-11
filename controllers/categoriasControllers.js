@@ -1,6 +1,5 @@
 const { request, response } = require('express');
 const Categoria = require('../models/categoria');
-const bcrypt = require('bcryptjs');
 
 const obtenerCategorias = async (req = request, res = response) => {
     const { desde = 0, limite = 5 } = req.query;
