@@ -7,9 +7,11 @@ const { validarJWT } = require('../middlewares/validarJWT');
 const { esAdminRol } = require('../middlewares/validar-roles');
 const router = Router();
 
-router.get('/usuarios', usuariosGet);
+router.get('/usuarios', validarJWT, usuariosGet);
 
 router.put('/usuarios/:id', [
+    validarJWT,
+    esAdminRol,
     check("id", "No es un ID valido").isMongoId(),
     check("rol").custom(esRolValido),
     check("id").custom(usuarioExite),

@@ -7,7 +7,11 @@ const { validarJWT } = require('../middlewares/validarJWT');
 const { esAdminRol } = require('../middlewares/validar-roles');
 const router = Router();
 
-router.get('/turnos', turnosGet);
+router.get('/turnos',[
+    validarJWT,
+    esAdminRol,
+    validarCampos
+], turnosGet);
 
 router.put('/turnos/:id', [
     validarJWT,

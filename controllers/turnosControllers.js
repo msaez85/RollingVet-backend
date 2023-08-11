@@ -25,7 +25,7 @@ const turnosPost = async (req = request, res = response) => {
         await turno.save();
         res.status(200).json({
             ok: true,
-            mensaje: 'turno creado correctamente',
+            mensaje: 'Turno creado correctamente',
         });
     } catch (error) {
         console.log(error);
@@ -41,18 +41,18 @@ const turnosDelete = async (req = request, res = response) => {
         const turno = await Turno.findById(id);
         if (!turno.estado) {
             return res.status(404).json({
-                msg: 'el turno ya estaba inactivo'
+                msg: 'El turno ya estaba inactivo'
             })
         }
         const turnoinactivado = await Turno.findByIdAndUpdate(id, { estado: false }, { new: true })
         if (turnoinactivado) {
             res.status(200).json({
-                msg: 'turno inactivado correctamente',
+                msg: 'Turno borrado correctamente',
             })
         }
     } catch (error) {
         console.log(error);
-        res.status(400).json({ ok: false, message: 'Ha ocurrido un error' });
+        res.status(400).json({ ok: false, message: 'Error al borrar el turno' });
     }
 };
 
@@ -63,7 +63,7 @@ const turnosUpdate = async (req = request, res = response) => {
         const turno = await Turno.findByIdAndUpdate(id, resto, { new: true });
         if (turno) {
             res.status(200).json({
-                mensaje: 'turno actualizado correctamente'
+                mensaje: 'Turno actualizado correctamente'
             })
         }
     } catch (error) {
