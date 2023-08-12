@@ -7,11 +7,13 @@ const { validarJWT } = require('../middlewares/validarJWT');
 const { esAdminRol } = require('../middlewares/validar-roles');
 const router = Router();
 
-router.get('/usuarios', validarJWT, usuariosGet);
+router.get('/usuarios', [
+    validarJWT,
+    validarCampos
+], usuariosGet);
 
 router.put('/usuarios/:id', [
     validarJWT,
-    esAdminRol,
     check("id", "No es un ID valido").isMongoId(),
     check("rol").custom(esRolValido),
     check("id").custom(usuarioExite),
@@ -27,9 +29,9 @@ router.delete('/usuarios/:id', [
 ], usuariosDelete);
 
 router.post('/usuarios', [
-    check("nombre", "el nombre es obligatorio desde express-validator").notEmpty(),
+    check("nombre", "el nombre es obligatorio").notEmpty(),
     check("correo").custom(emailExiste),
-    check("password", "la contraseña debe tener al menos 6 caracteres desde express-validator").isLength({ min: 6 }),
+    check("password", "la contraseña debe tener al menos 3 caracteres").isLength({ min: 3 }),
     check("rol").custom(esRolValido),
     validarCampos
 ], usuariosPost);

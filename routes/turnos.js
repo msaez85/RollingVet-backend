@@ -2,20 +2,17 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { turnosGet, turnosPost, turnosDelete, turnosUpdate } = require('../controllers/turnosControllers');
 const { validarCampos } = require('../middlewares/validaciones');
-const { emailExiste, usuarioExite, turnoExite } = require('../helpers/db-validators');
+const { turnoExite, emailRegistrado } = require('../helpers/db-validators');
 const { validarJWT } = require('../middlewares/validarJWT');
-const { esAdminRol } = require('../middlewares/validar-roles');
 const router = Router();
 
 router.get('/turnos',[
     validarJWT,
-    esAdminRol,
     validarCampos
 ], turnosGet);
 
 router.put('/turnos/:id', [
     validarJWT,
-    esAdminRol,
     check("id", "No es un ID valido").isMongoId(),
     check("id").custom(turnoExite),
     validarCampos
@@ -23,17 +20,15 @@ router.put('/turnos/:id', [
 
 router.delete('/turnos/:id', [
     validarJWT,
-    esAdminRol,
     check("id", "No es un ID valido").isMongoId(),
-    check("id").custom(usuarioExite),
+    check("id").custom(turnoExite),
     validarCampos
 ], turnosDelete);
 
 router.post('/turnos', [
     validarJWT,
-    esAdminRol,
-    check("nombre", "el nombre es obligatorio desde express-validator").notEmpty(),
-    check("correo").custom(emailExiste),
+    check("ownerName", "el nombre del dueño de la mascota es obligatorio").notEmpty(),
+    check("email").custom(emailRegistrado),
     validarCampos
 ], turnosPost);
 

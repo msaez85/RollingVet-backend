@@ -5,9 +5,7 @@ const { generarJWT } = require('../helpers/generar-JWT')
 
 const login = async (req = request, res = response) => {
     const { correo, password } = req.body;
-
     try {
-
         const usuario = await Usuario.findOne({ correo })
         const passwordValida = bcrypt.compareSync(password, usuario.password)
         if (!usuario || !passwordValida || !usuario.estado) {
@@ -17,18 +15,15 @@ const login = async (req = request, res = response) => {
         }
         const token = await generarJWT(usuario.id);
 
-        res.json({
+        res.status(200).json({
             msg: "login OK",
-            token,
-            usuario
+            token
         })
     } catch (error) {
         return res.status(500).json({
-            msg: "Ponerse en contacto con el administrador",
-            error
+            msg: "Ponerse en contacto con el administrador"
         })
     }
-
 }
 
 module.exports = { login }

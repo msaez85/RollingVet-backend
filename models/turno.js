@@ -5,10 +5,13 @@ const TurnoSchema = Schema({
         type: String,
         required: [true, "El nombre del dueño es obligatorio"]
     },
+    email: {
+        type: String,
+        required: [true, "El correo del dueño es obligatorio"]
+    },
     name: {
         type: String,
-        required: [true, "El nombre de la mascota es obligatorio"],
-        unique: true
+        required: [true, "El nombre de la mascota es obligatorio"]
     },
     vet: {
         type: String,
@@ -33,7 +36,7 @@ const TurnoSchema = Schema({
 
 TurnoSchema.methods.toJSON = function () {
     const { __v, _id, ...turno } = this.toObject();
-    turno.uid = _id
+    turno.tid = _id
     return turno;
 }
 module.exports = model("Turno", TurnoSchema)

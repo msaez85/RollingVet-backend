@@ -7,8 +7,7 @@ const PacienteSchema = Schema({
     },
     email: {
         type: String,
-        required: [true, "El correo es obligatorio"],
-        unique: true
+        required: [true, "El correo es obligatorio"]
     },
     phone: {
         type: String,
@@ -32,7 +31,7 @@ const PacienteSchema = Schema({
 
 PacienteSchema.methods.toJSON = function () {
     const { __v, _id, ...paciente } = this.toObject();
-    paciente.uid = _id
+    paciente.pid = _id
     return paciente;
 }
 module.exports = model("Paciente", PacienteSchema)
