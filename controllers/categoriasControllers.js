@@ -17,7 +17,6 @@ const obtenerCategorias = async (req = request, res = response) => {
 const obtenerCategoria = async (req = request, res = response) => {
     const { id } = req.params;
     const categoria = await Categoria.findById(id).populate("usuario", "nombre correo");
-
     res.json({
         categoria
     })
@@ -35,7 +34,6 @@ const crearCategoria = async (req = request, res = response) => {
         nombre,
         usuario: req.usuario._id
     }
-
     const categoria = new Categoria(data);
     await categoria.save();
     res.status(201).json({
@@ -53,7 +51,6 @@ const actualizarCategoria = async (req = request, res = response) => {
     }
     const categoria = await Categoria.findByIdAndUpdate(id, data, {new:true});
     res.status(201).json({
-        categoria,
         msg:"Categoria actualizada"
     })
 }
@@ -61,9 +58,7 @@ const actualizarCategoria = async (req = request, res = response) => {
 const borrarCategoria = async (req = request, res = response) => {
     const { id } = req.params;
     const categoriaBarrada = await Categoria.findByIdAndUpdate(id, {estado:false}, {new:true})
-
     res.json({
-        categoriaBarrada,
         msg:"Categoria inactivada"
     })
 }

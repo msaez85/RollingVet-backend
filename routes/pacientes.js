@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { pacientesGet, pacientesPost, pacientesDelete, pacientesUpdate } = require('../controllers/pacientesControllers');
 const { validarCampos } = require('../middlewares/validaciones');
-const { emailExiste, usuarioExite, pacienteExite } = require('../helpers/db-validators');
+const { emailRegistrado, usuarioExite, pacienteExite } = require('../helpers/db-validators');
 const { validarJWT } = require('../middlewares/validarJWT');
 const { esAdminRol } = require('../middlewares/validar-roles');
 const router = Router();
@@ -25,15 +25,15 @@ router.delete('/pacientes/:id', [
     validarJWT,
     esAdminRol,
     check("id", "No es un ID valido").isMongoId(),
-    check("id").custom(usuarioExite),
+    check("id").custom(pacienteExite),
     validarCampos
 ], pacientesDelete);
 
 router.post('/pacientes', [
     validarJWT,
     esAdminRol,
-    check("nombre", "el nombre es obligatorio desde express-validator").notEmpty(),
-    check("correo").custom(emailExiste),
+    check("name", "el nombre es obligatorio").notEmpty(),
+    check("email").custom(emailRegistrado),
     validarCampos
 ], pacientesPost);
 

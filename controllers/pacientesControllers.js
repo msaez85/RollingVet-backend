@@ -9,9 +9,8 @@ const pacientesGet = async (req = request, res = response) => {
         const pacientes = await Paciente.find(query).skip(desde).limit(limite)
         res.status(200).json(pacientes);
     } catch (error) {
-        console.log(error);
         res.status(404).json({
-            message: "Error al cargar los pacientes",
+            msg: "Error al cargar los pacientes"
         });
     }
 };
@@ -24,13 +23,11 @@ const pacientesPost = async (req = request, res = response) => {
         //guardar en BD
         await paciente.save();
         res.status(200).json({
-            ok: true,
-            mensaje: 'Paciente creado correctamente',
+            msg: 'Paciente creado correctamente'
         });
     } catch (error) {
-        console.log(error);
         res.status(404).json({
-            message: "Error al crear al paciente",
+            msg: "Error al crear al paciente"
         });
     }
 };
@@ -47,12 +44,11 @@ const pacientesDelete = async (req = request, res = response) => {
         const pacienteinactivado = await Paciente.findByIdAndUpdate(id, { estado: false }, { new: true })
         if (pacienteinactivado) {
             res.status(200).json({
-                msg: 'Paciente inactivado correctamente',
+                msg: 'Paciente inactivado correctamente'
             })
         }
     } catch (error) {
-        console.log(error);
-        res.status(400).json({ ok: false, message: 'Error al borrar el paciente' });
+        res.status(400).json({ ok: false, msg: 'Error al borrar el paciente' });
     }
 };
 
@@ -63,13 +59,12 @@ const pacientesUpdate = async (req = request, res = response) => {
         const paciente = await Paciente.findByIdAndUpdate(id, resto, { new: true });
         if (paciente) {
             res.status(200).json({
-                mensaje: 'Paciente actualizado correctamente'
+                msg: 'Paciente actualizado correctamente'
             })
         }
     } catch (error) {
-        console.log(error);
         res.status(404).json({
-            message: "Error al actualizar al paciente",
+            msg: "Error al actualizar al paciente"
         });
     }
 };

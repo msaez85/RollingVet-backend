@@ -13,9 +13,8 @@ const usuariosGet = async (req = request, res = response) => {
         ])
         res.status(200).json({ usuarios, total });
     } catch (error) {
-        console.log(error);
         res.status(404).json({
-            message: "Error al cargar los usuarios",
+            msg: "Error al cargar los usuarios"
         });
     }
 };
@@ -32,12 +31,11 @@ const usuariosPost = async (req = request, res = response) => {
         //guardar en BD
         await usuario.save()
         res.status(200).json({
-            message: "Usuario generado correctamente",
+            msg: "Usuario generado correctamente"
         });
     } catch (error) {
-        console.log(error);
         res.status(404).json({
-            message: "Error al generar el usuario",
+            msg: "Error al generar el usuario"
         });
     }
 };
@@ -49,22 +47,21 @@ const usuariosDelete = async (req = request, res = response) => {
         if (!usuario.estado) {
             return res
                 .status(404)
-                .json({ ok: true, message: "El usuario ya estaba inactivo" });
+                .json({ msg: "El usuario ya estaba inactivo" });
         }
         const usuarioinactivado = await Usuario.findByIdAndUpdate(id, { estado: false }, { new: true })
         if (usuarioinactivado) {
-            res.status(200).json({ mensaje: "Usuario borrado correctamente" });
+            res.status(200).json({ msg: "Usuario borrado correctamente" });
         }
     } catch (error) {
-        console.log(error);
-        res.status(400).json({ ok: false, message: "Error al borrar el usuario" });
+        res.status(400).json({ msg: "Error al borrar el usuario" });
     }
 };
 
 const usuariosUpdate = async (req = request, res = response) => {
     try {
         const { id } = req.params;
-        const { password, correo, ...resto } = req.body;
+        const { password, ...resto } = req.body;
         if (password) {
             const salt = bcrypt.genSaltSync(10);
             resto.password = bcrypt.hashSync(password, salt);
@@ -72,13 +69,12 @@ const usuariosUpdate = async (req = request, res = response) => {
         const usuario = await Usuario.findByIdAndUpdate(id, resto, { new: true });
         if (usuario) {
             res.status(200).json({
-                message: "Usuario actualizado correctamente",
+                msg: "Usuario actualizado correctamente"
             });
         }
     } catch (error) {
-        console.log(error);
         res.status(404).json({
-            message: "Error al actualizar el usuario",
+            msg: "Error al actualizar el usuario"
         });
     }
 };
