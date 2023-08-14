@@ -14,10 +14,10 @@ const login = async (req = request, res = response) => {
             })
         }
         const token = await generarJWT(usuario.id);
-
         res.status(200).json({
             msg: "login OK",
-            token
+            token,
+            usuario
         })
     } catch (error) {
         return res.status(500).json({
