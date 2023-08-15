@@ -5,7 +5,7 @@ const UsuarioSchema = Schema({
         type: String,
         required: [true, "El nombre del usuario es obligatorio desde models"]
     },
-    correo: {
+    email: {
         type: String,
         required: [true, "El correo es obligatorio desde models"],
         unique: true

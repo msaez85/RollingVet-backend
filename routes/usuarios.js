@@ -30,7 +30,7 @@ router.delete('/usuarios/:id', [
 
 router.post('/usuarios', [
     check("nombre", "el nombre es obligatorio").notEmpty(),
-    check("correo").custom(emailExiste),
+    check("email").custom(emailExiste),
     check("password", "la contraseña debe tener al menos 3 caracteres").isLength({ min: 3 }),
     check("rol").custom(esRolValido),
     validarCampos
