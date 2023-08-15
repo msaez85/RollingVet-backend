@@ -5,7 +5,8 @@ const dbConnection = async () => {
         await mongoose.connect(process.env.MONGODB_CNN);
         console.log('mongoDB online')
     } catch (error) {
-        throw new Error("Error a la hora de iniciar la DB")
+        console.log(error);
+        throw new Error("Error a la hora de iniciar la DB");
     }
 }
 
