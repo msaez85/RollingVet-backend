@@ -10,17 +10,17 @@ const esRolValido = async (rol) => {
     }
 }
 
-const emailExiste = async (correo) => {
-    const existeEmail = await Usuario.findOne({ correo });
+const emailExiste = async (email) => {
+    const existeEmail = await Usuario.findOne({ email });
     if (existeEmail) {
-        throw new Error(`El correo ${correo} ya existe en la base de datos`)
+        throw new Error(`El correo ${email} ya existe en la base de datos`)
     }
 }
 
-const emailRegistrado = async (correo) => {
-    const existeEmail = await Usuario.findOne({ correo });
+const emailRegistrado = async (email) => {
+    const existeEmail = await Usuario.findOne({ email });
     if (!existeEmail) {
-        throw new Error(`El correo ${correo} no existe en la base de datos`)
+        throw new Error(`El correo ${email} no existe en la base de datos`)
     }
 }
 

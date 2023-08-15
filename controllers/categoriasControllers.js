@@ -50,8 +50,9 @@ const actualizarCategoria = async (req = request, res = response) => {
         usuario
     }
     const categoria = await Categoria.findByIdAndUpdate(id, data, {new:true});
-    res.status(201).json({
-        msg:"Categoria actualizada"
+    res.status(200).json({
+        msg:"Categoria actualizada",
+        status: 200
     })
 }
 
@@ -59,7 +60,8 @@ const borrarCategoria = async (req = request, res = response) => {
     const { id } = req.params;
     const categoriaBarrada = await Categoria.findByIdAndUpdate(id, {estado:false}, {new:true})
     res.json({
-        msg:"Categoria inactivada"
+        msg:'Categoria inactivada',
+        status: 200
     })
 }
 
