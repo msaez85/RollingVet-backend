@@ -15,7 +15,7 @@ const TurnoSchema = Schema({
     },
     vet: {
         type: String,
-        required: [true, "El veteriinario es obligatorio"]
+        required: [true, "El veterinario es obligatorio"]
     },
     date: {
         type: String,
