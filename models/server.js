@@ -34,7 +34,7 @@ class Server {
     listen() {
         this.app.listen(8080, () => {
             console.log('server online', this.app.port);
-            console.log('backend server iniciado en el 8080');
+            console.log('backend server iniciado');
        //   console.log(process.env);
         })
     }
