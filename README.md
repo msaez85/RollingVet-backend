@@ -54,7 +54,7 @@ Asegúrate de tener las siguientes herramientas instaladas en tu sistema antes d
    yarn start
    ```
 
-2. El servidor estará en funcionamiento en el puerto configurado. Por defecto, puede accederse en `http://localhost:3000`.
+2. El servidor estará en funcionamiento en el puerto configurado. Por defecto, puede accederse en `http://localhost:8080`.
 
 ## Estructura del Proyecto
 
