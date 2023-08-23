@@ -45,4 +45,11 @@ const turnoExite = async (id) => {
     }
 }
 
-module.exports = { emailExiste, esRolValido, usuarioExite, pacienteExite, turnoExite, emailRegistrado };
+const productoExite = async (id) => {
+    const existeProducto = await Producto.findById(id);
+    if(!existeProducto){
+        throw new Error(`El producto con ID ${id} no existe en la base de datos`)
+    }
+}
+
+module.exports = { emailExiste, esRolValido, usuarioExite, pacienteExite, turnoExite, emailRegistrado, productoExite };

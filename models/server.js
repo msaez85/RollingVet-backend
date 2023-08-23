@@ -28,6 +28,7 @@ class Server {
         this.app.use(this.rootPath, require('../routes/usuarios'));
         this.app.use(this.rootPath, require('../routes/pacientes'));
         this.app.use(this.rootPath, require('../routes/turnos'));
+        this.app.use(this.rootPath, require('../routes/productos'));
 
     }
 
