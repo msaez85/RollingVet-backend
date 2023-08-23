@@ -12,9 +12,7 @@ const esAdminRol = (req = request, res = response, next) => {
             msg: `${nombre} no es usuario administrador`
         })
     }
-
     next();
-
 }
 
 module.exports = { esAdminRol }
