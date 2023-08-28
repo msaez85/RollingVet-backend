@@ -2,6 +2,7 @@ const Rol = require('../models/Rol');
 const Usuario = require('../models/usuario');
 const Paciente = require('../models/paciente');
 const Turno = require('../models/turno');
+const Producto = require('../models/producto');
 
 const esRolValido = async (rol) => {
     const existeRol = await Rol.findOne({ rol })
