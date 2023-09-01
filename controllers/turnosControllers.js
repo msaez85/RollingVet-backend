@@ -16,6 +16,21 @@ const turnosGet = async (req = request, res = response) => {
     }
 };
 
+const turnosDiariosGet = async (req = request, res = response) => {
+    try {
+        const { desde, limite } = req.query;
+        const { fecha, vet } = req.params;
+        const query = {date: fecha, estado: true, vet: vet};
+        const turnos = await Turno.find(query).skip(desde).limit(limite)
+        res.status(200).json({ turnos });
+    } catch (error) {
+        res.status(404).json({
+            msg: 'Error al cargar los turnos',
+            status: 404
+,        });
+    }
+};
+
 const turnosPost = async (req = request, res = response) => {
     try {
         const datos = req.body;
@@ -79,4 +94,4 @@ const turnosUpdate = async (req = request, res = response) => {
     }
 };
 
-module.exports = { turnosGet, turnosPost, turnosDelete, turnosUpdate };
+module.exports = { turnosGet, turnosDiariosGet, turnosPost, turnosDelete, turnosUpdate };
