@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { turnosGet, turnosPost, turnosDelete, turnosUpdate } = require('../controllers/turnosControllers');
+const { turnosGet, turnosDiariosGet, turnosPost, turnosDelete, turnosUpdate } = require('../controllers/turnosControllers');
 const { validarCampos } = require('../middlewares/validaciones');
 const { turnoExite, emailRegistrado } = require('../helpers/db-validators');
 const { validarJWT } = require('../middlewares/validarJWT');
@@ -10,6 +10,11 @@ router.get('/turnos',[
     validarJWT,
     validarCampos
 ], turnosGet);
+
+router.get('/turnos/:fecha/:vet',[
+    validarJWT,
+    validarCampos
+], turnosDiariosGet);
 
 router.put('/turnos/:id', [
     validarJWT,
