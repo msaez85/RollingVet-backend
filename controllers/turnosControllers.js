@@ -11,8 +11,8 @@ const turnosGet = async (req = request, res = response) => {
     } catch (error) {
         res.status(404).json({
             msg: 'Error al cargar los turnos',
-            status: 404
-,        });
+            status: 404,
+        });
     }
 };
 
@@ -20,14 +20,14 @@ const turnosDiariosGet = async (req = request, res = response) => {
     try {
         const { desde, limite } = req.query;
         const { fecha, vet } = req.params;
-        const query = {date: fecha, estado: true, vet: vet};
+        const query = { date: fecha, estado: true, vet: vet };
         const turnos = await Turno.find(query).skip(desde).limit(limite)
         res.status(200).json({ turnos });
     } catch (error) {
         res.status(404).json({
             msg: 'Error al cargar los turnos',
-            status: 404
-,        });
+            status: 404,
+        });
     }
 };
 
@@ -68,7 +68,7 @@ const turnosDelete = async (req = request, res = response) => {
             })
         }
     } catch (error) {
-        res.status(400).json({ 
+        res.status(400).json({
             msg: 'Error al borrar el turno',
             status: 400
         });
